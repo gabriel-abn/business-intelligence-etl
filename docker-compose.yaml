@@ -22,4 +22,4 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - ./database/olap/1_oltp.sql:/docker-entrypoint-initdb.d/olap.sql
+      - ./database/olap/1_olap.sql:/docker-entrypoint-initdb.d/olap.sql
