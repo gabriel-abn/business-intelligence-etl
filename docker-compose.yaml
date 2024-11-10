@@ -1,0 +1,25 @@
+services:
+  oltp:
+    image: postgres:latest
+    container_name: bi-oltp
+    environment:
+      POSTGRES_USER: oltp
+      POSTGRES_PASSWORD: oltp
+      POSTGRES_DB: oltp
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/oltp/1_oltp.sql:/docker-entrypoint-initdb.d/1_oltp.sql
+      - ./database/oltp/2_oltp.sql:/docker-entrypoint-initdb.d/2_oltp.sql
+
+  olap:
+    image: postgres:latest
+    container_name: bi-olap
+    environment:
+      POSTGRES_USER: olap
+      POSTGRES_PASSWORD: olap
+      POSTGRES_DB: olap
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./database/olap/1_oltp.sql:/docker-entrypoint-initdb.d/olap.sql
