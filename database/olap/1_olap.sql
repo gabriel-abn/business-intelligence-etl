@@ -1,13 +1,11 @@
 CREATE SCHEMA olap;
 
--- Criação da tabela de dimensões: Locais
 CREATE TABLE olap.dim_local (
   id INTEGER PRIMARY KEY,
   name VARCHAR(255),
   description TEXT
 );
 
--- Criação da tabela de dimensões: Tempo
 CREATE TABLE olap.dim_time (
   id SERIAL PRIMARY KEY,
   year INTEGER,
@@ -19,7 +17,6 @@ CREATE TABLE olap.dim_time (
   is_weekend BOOLEAN
 );
 
--- Criação da tabela de dimensões: Irrigadores
 CREATE TABLE olap.dim_sprinkler (
   id INTEGER PRIMARY KEY,
   irrigation_point_id INTEGER NOT NULL,
@@ -32,7 +29,6 @@ CREATE TABLE olap.dim_sprinkler (
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
 );
 
--- Criação da tabela de dimensões: Luzes Automáticas
 CREATE TABLE olap.dim_light (
   id INTEGER PRIMARY KEY,
   service_id INTEGER NOT NULL,
