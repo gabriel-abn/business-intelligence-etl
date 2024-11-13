@@ -29,7 +29,7 @@ CREATE TABLE garden.irrigation_point (
   sprinklers_count INTEGER NOT NULL,
   avg_water_consumption FLOAT NOT NULL,
   local_id INTEGER NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  is_active BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   ---
   FOREIGN KEY (local_id) REFERENCES global.local(id)
@@ -56,7 +56,7 @@ CREATE TABLE security.monitoring_point (
   camera_model VARCHAR(255) NOT NULL,
   avg_energy_consumption FLOAT NOT NULL,
   local_id INTEGER NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  is_active BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   ---
   FOREIGN KEY (local_id) REFERENCES global.local(id)
@@ -84,7 +84,7 @@ CREATE TABLE automation.auto_door (
   model VARCHAR(255) NOT NULL,
   avg_energy_consumption FLOAT NOT NULL,
   local_id INTEGER NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  is_active BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   ---
   FOREIGN KEY (local_id) REFERENCES global.local(id)
@@ -101,7 +101,7 @@ CREATE TABLE lighting.light (
   model VARCHAR(255) NOT NULL,
   avg_energy_consumption FLOAT NOT NULL,
   local_id INTEGER NOT NULL,
-  status VARCHAR(255) NOT NULL,
+  is_active BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT NOW(),
   ---
   FOREIGN KEY (local_id) REFERENCES global.local(id)
