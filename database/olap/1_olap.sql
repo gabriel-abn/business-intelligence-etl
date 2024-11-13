@@ -6,8 +6,10 @@ CREATE TABLE olap.dim_local (
   description TEXT
 );
 
+CREATE SEQUENCE olap.local_id_seq START 1 INCREMENT 1;
+
 CREATE TABLE olap.dim_time (
-  id SERIAL PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
   year INTEGER,
   quarter INTEGER,
   month INTEGER,
@@ -16,6 +18,8 @@ CREATE TABLE olap.dim_time (
   day_of_week VARCHAR(15),
   is_weekend BOOLEAN
 );
+
+CREATE SEQUENCE olap.time_id_seq START 1 INCREMENT 1;
 
 CREATE TABLE olap.dim_sprinkler (
   id INTEGER PRIMARY KEY,
@@ -41,6 +45,8 @@ CREATE TABLE olap.dim_light (
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
 );
 
+CREATE SEQUENCE olap.light_id_seq START 1 INCREMENT 1;
+
 CREATE TABLE olap.dim_auto_door (
   id INTEGER PRIMARY KEY,
   service_id INTEGER NOT NULL,
@@ -52,6 +58,8 @@ CREATE TABLE olap.dim_auto_door (
   --
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
 );
+
+CREATE SEQUENCE olap.auto_door_id_seq START 1 INCREMENT 1;
 
 CREATE TABLE olap.fact_automation_billing (
   bill_id INTEGER PRIMARY KEY,
@@ -72,3 +80,5 @@ CREATE TABLE olap.fact_automation_billing (
   FOREIGN KEY (light_id) REFERENCES dim_light(id),
   FOREIGN KEY (time_id) REFERENCES dim_time(id)
 );
+
+CREATE SEQUENCE olap.automation_billing_id_seq START 1 INCREMENT 1;
