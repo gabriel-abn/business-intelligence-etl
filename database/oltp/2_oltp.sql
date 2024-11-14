@@ -1,809 +1,125 @@
--- global.local.csv
-INSERT INTO
-  global.local (id, name, description)
-VALUES
-  (1, 'Local 1', 'Description for Local 1'),
-  (2, 'Local 2', 'Description for Local 2'),
-  (3, 'Local 3', 'Description for Local 3'),
-  (4, 'Local 4', 'Description for Local 4'),
-  (5, 'Local 5', 'Description for Local 5'),
-  (6, 'Local 6', 'Description for Local 6'),
-  (7, 'Local 7', 'Description for Local 7'),
-  (8, 'Local 8', 'Description for Local 8'),
-  (9, 'Local 9', 'Description for Local 9'),
-  (10, 'Local 10', 'Description for Local 10'),
-  (11, 'Local 11', 'Description for Local 11'),
-  (12, 'Local 12', 'Description for Local 12'),
-  (13, 'Local 13', 'Description for Local 13'),
-  (14, 'Local 14', 'Description for Local 14'),
-  (15, 'Local 15', 'Description for Local 15'),
-  (16, 'Local 16', 'Description for Local 16'),
-  (17, 'Local 17', 'Description for Local 17'),
-  (18, 'Local 18', 'Description for Local 18'),
-  (19, 'Local 19', 'Description for Local 19'),
-  (20, 'Local 20', 'Description for Local 20');
+-- Insert sample data into global.local
+INSERT INTO global.local (id, name, description) VALUES
+(1, 'Block 423', 'Front garden'),
+(2, 'Block 234', 'Backyard'),
+(3, 'Block 123', 'Corridor 1'),
+(4, 'Block 456', 'Corridor 2'),
+(5, 'Block 789', 'Parking lot'),
+(6, 'Block 321', 'Lobby'),
+(7, 'Block 654', 'Gym'),
+(8, 'Block 987', 'Swimming pool area'),
+(9, 'Block 111', 'Playground'),
+(10, 'Block 222', 'Rooftop'),
+(11, 'Block 423', 'Backyard'),
+(12, 'Block 234', 'Front garden'),
+(13, 'Block 123', 'Parking lot'),
+(14, 'Block 456', 'Lobby'),
+(15, 'Block 789', 'Gym'),
+(16, 'Block 321', 'Swimming pool area'),
+(17, 'Block 654', 'Playground'),
+(18, 'Block 987', 'Rooftop'),
+(19, 'Block 111', 'Corridor 1'),
+(20, 'Block 222', 'Corridor 2');
 
--- global.resource.csv
-INSERT INTO
-  global.resource (id, name)
-VALUES
-  (1, 'Resource 1'),
-  (2, 'Resource 2'),
-  (3, 'Resource 3'),
-  (4, 'Resource 4'),
-  (5, 'Resource 5'),
-  (6, 'Resource 6'),
-  (7, 'Resource 7'),
-  (8, 'Resource 8'),
-  (9, 'Resource 9'),
-  (10, 'Resource 10'),
-  (11, 'Resource 11'),
-  (12, 'Resource 12'),
-  (13, 'Resource 13'),
-  (14, 'Resource 14'),
-  (15, 'Resource 15'),
-  (16, 'Resource 16'),
-  (17, 'Resource 17'),
-  (18, 'Resource 18'),
-  (19, 'Resource 19'),
-  (20, 'Resource 20');
+-- Insert sample data into global.resource
+INSERT INTO global.resource (id, name) VALUES
+(1, 'Water'),
+(2, 'Electricity');
 
--- global.service.csv
-INSERT INTO
-  global.service (id, name, resource_id)
-VALUES
-  (1, 'Service 1', 5),
-  (2, 'Service 2', 12),
-  (3, 'Service 3', 11),
-  (4, 'Service 4', 6),
-  (5, 'Service 5', 15),
-  (6, 'Service 6', 4),
-  (7, 'Service 7', 20),
-  (8, 'Service 8', 19),
-  (9, 'Service 9', 14),
-  (10, 'Service 10', 2),
-  (11, 'Service 11', 11),
-  (12, 'Service 12', 18),
-  (13, 'Service 13', 7),
-  (14, 'Service 14', 18),
-  (15, 'Service 15', 4),
-  (16, 'Service 16', 12),
-  (17, 'Service 17', 10),
-  (18, 'Service 18', 1),
-  (19, 'Service 19', 12),
-  (20, 'Service 20', 8);
+-- Insert sample data into global.service
+INSERT INTO global.service (id, name, resource_id) VALUES
+(1, 'Water Supply', 1),
+(2, 'Electricity Supply', 2);
 
--- garden.irrigation_point.csv
-INSERT INTO
-  garden.irrigation_point (
-    id,
-    sprinklers_count,
-    avg_water_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (1, 10, 20.0, 1, 'Active', '2023-01-01 00:00:00'),
-  (
-    2,
-    15,
-    25.0,
-    2,
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
+-- Insert sample data into garden.irrigation_point
+INSERT INTO garden.irrigation_point (id, sprinklers_count, avg_water_consumption, local_id, is_active, created_at) VALUES
+(1, 4, 15.5, 1, TRUE, '2024-01-01 08:00:00'),
+(2, 6, 20.0, 2, TRUE, '2024-01-01 08:00:00'),
+(3, 5, 18.0, 3, TRUE, '2024-01-01 08:00:00'),
+(4, 3, 12.5, 4, TRUE, '2024-01-01 08:00:00'),
+(5, 7, 22.0, 5, TRUE, '2024-01-01 08:00:00'),
+(6, 4, 16.0, 6, TRUE, '2024-02-01 08:00:00'),
+(7, 6, 21.0, 7, TRUE, '2024-02-01 08:00:00'),
+(8, 5, 19.0, 8, TRUE, '2024-02-01 08:00:00'),
+(9, 3, 13.0, 9, TRUE, '2024-02-01 08:00:00'),
+(10, 7, 23.0, 10, TRUE, '2024-02-01 08:00:00');
 
--- garden.irrigation.csv
-INSERT INTO
-  garden.irrigation (
-    id,
-    service_id,
-    irrigation_point_id,
-    start_time,
-    end_time
-  )
-VALUES
-  (
-    1,
-    1,
-    1,
-    '2023-01-01 06:00:00',
-    '2023-01-01 07:00:00'
-  ),
-  (
-    2,
-    2,
-    2,
-    '2023-02-01 06:00:00',
-    '2023-02-01 07:00:00'
-  );
+-- Insert sample data into garden.irrigation
+INSERT INTO garden.irrigation (id, service_id, irrigation_point_id, start_time, end_time) VALUES
+(1, 1, 1, '2024-01-01 06:00:00', '2024-01-01 06:30:00'),
+(2, 1, 2, '2024-01-01 07:00:00', '2024-01-01 07:30:00'),
+(3, 1, 3, '2024-01-01 08:00:00', '2024-01-01 08:30:00'),
+(4, 1, 4, '2024-01-01 09:00:00', '2024-01-01 09:30:00'),
+(5, 1, 5, '2024-01-01 10:00:00', '2024-01-01 10:30:00'),
+(6, 1, 6, '2024-02-01 06:00:00', '2024-02-01 06:30:00'),
+(7, 1, 7, '2024-02-01 07:00:00', '2024-02-01 07:30:00'),
+(8, 1, 8, '2024-02-01 08:00:00', '2024-02-01 08:30:00'),
+(9, 1, 9, '2024-02-01 09:00:00', '2024-02-01 09:30:00'),
+(10, 1, 10, '2024-02-01 10:00:00', '2024-02-01 10:30:00');
 
--- security.monitoring_point.csv
-INSERT INTO
-  security.monitoring_point (
-    id,
-    service_id,
-    camera_model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    1,
-    'Camera Model 1',
-    5.0,
-    '1',
-    'Active',
-    '2023-01-01 00:00:00'
-  ),
-  (
-    2,
-    2,
-    'Camera Model 2',
-    7.0,
-    '2',
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
+-- Insert sample data into security.monitoring_point
+INSERT INTO security.monitoring_point (id, service_id, camera_model, avg_energy_consumption, local_id, is_active, created_at) VALUES
+(1, 2, 'CamModelX', 5.5, 1, TRUE, '2024-01-01 08:00:00'),
+(2, 2, 'CamModelY', 6.0, 2, TRUE, '2024-01-01 08:00:00'),
+(3, 2, 'CamModelZ', 5.8, 3, TRUE, '2024-01-01 08:00:00'),
+(4, 2, 'CamModelA', 6.2, 4, TRUE, '2024-01-01 08:00:00'),
+(5, 2, 'CamModelB', 5.9, 5, TRUE, '2024-01-01 08:00:00'),
+(6, 2, 'CamModelC', 6.1, 6, TRUE, '2024-02-01 08:00:00'),
+(7, 2, 'CamModelD', 6.3, 7, TRUE, '2024-02-01 08:00:00'),
+(8, 2, 'CamModelE', 6.4, 8, TRUE, '2024-02-01 08:00:00'),
+(9, 2, 'CamModelF', 6.5, 9, TRUE, '2024-02-01 08:00:00'),
+(10, 2, 'CamModelG', 6.6, 10, TRUE, '2024-02-01 08:00:00');
 
--- security.guard.csv
-INSERT INTO
-  security.guard (
-    cpf,
-    service_id,
-    name,
-    salary,
-    local_id,
-    created_at
-  )
-VALUES
-  (
-    '12345678901',
-    1,
-    'Guard 1',
-    3000.0,
-    1,
-    '2023-01-01 00:00:00'
-  ),
-  (
-    '23456789012',
-    2,
-    'Guard 2',
-    3500.0,
-    2,
-    '2023-02-01 00:00:00'
-  );
+-- Insert sample data into security.guard
+INSERT INTO security.guard (cpf, service_id, name, salary, local_id, created_at) VALUES
+('12345678901', 2, 'John Doe', 3000.0, 1, '2024-01-01 08:00:00'),
+('98765432100', 2, 'Jane Smith', 3200.0, 2, '2024-01-01 08:00:00'),
+('12312312312', 2, 'Alice Johnson', 3100.0, 3, '2024-01-01 08:00:00'),
+('32132132132', 2, 'Bob Brown', 3300.0, 4, '2024-01-01 08:00:00'),
+('45645645645', 2, 'Charlie Davis', 3400.0, 5, '2024-01-01 08:00:00'),
+('78978978978', 2, 'David Evans', 3500.0, 6, '2024-02-01 08:00:00'),
+('65465465465', 2, 'Eve Harris', 3600.0, 7, '2024-02-01 08:00:00'),
+('32132132432', 2, 'Frank Green', 3700.0, 8, '2024-02-01 08:00:00'),
+('98798798798', 2, 'Grace Hill', 3800.0, 9, '2024-02-01 08:00:00'),
+('12312312352', 2, 'Hank Ives', 3900.0, 10, '2024-02-01 08:00:00');
 
--- automation.auto_door.csv
-INSERT INTO
-  automation.auto_door (
-    id,
-    service_id,
-    model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    12,
-    'Door Model 1',
-    11.05,
-    11,
-    'Closed',
-    '2023-10-25 08:11:52'
-  ),
-  (
-    2,
-    13,
-    'Door Model 2',
-    17.92,
-    9,
-    'Closed',
-    '2023-04-14 10:57:37'
-  ),
-  (
-    3,
-    4,
-    'Door Model 3',
-    5.53,
-    15,
-    'Closed',
-    '2023-04-05 07:22:40'
-  ),
-  (
-    4,
-    12,
-    'Door Model 4',
-    6.25,
-    20,
-    'Open',
-    '2023-10-17 07:46:33'
-  ),
-  (
-    5,
-    3,
-    'Door Model 5',
-    17.62,
-    4,
-    'Open',
-    '2023-01-20 12:05:25'
-  ),
-  (
-    6,
-    18,
-    'Door Model 6',
-    6.74,
-    7,
-    'Open',
-    '2023-02-20 12:24:00'
-  ),
-  (
-    7,
-    18,
-    'Door Model 7',
-    15.84,
-    8,
-    'Closed',
-    '2023-09-14 05:40:24'
-  ),
-  (
-    8,
-    17,
-    'Door Model 8',
-    13.32,
-    5,
-    'Closed',
-    '2023-12-09 17:02:56'
-  ),
-  (
-    9,
-    15,
-    'Door Model 9',
-    10.0,
-    15,
-    'Closed',
-    '2023-01-01 02:45:54'
-  ),
-  (
-    10,
-    4,
-    'Door Model 10',
-    16.86,
-    17,
-    'Closed',
-    '2023-09-12 20:52:29'
-  ),
-  (
-    11,
-    16,
-    'Door Model 11',
-    10.44,
-    16,
-    'Closed',
-    '2023-04-13 05:54:40'
-  ),
-  (
-    12,
-    17,
-    'Door Model 12',
-    17.14,
-    18,
-    'Closed',
-    '2023-05-14 01:12:05'
-  ),
-  (
-    13,
-    18,
-    'Door Model 13',
-    13.69,
-    16,
-    'Open',
-    '2023-05-19 06:35:53'
-  ),
-  (
-    14,
-    15,
-    'Door Model 14',
-    8.66,
-    18,
-    'Open',
-    '2023-03-03 14:45:30'
-  ),
-  (
-    15,
-    3,
-    'Door Model 15',
-    17.62,
-    17,
-    'Closed',
-    '2023-05-03 20:55:47'
-  ),
-  (
-    16,
-    8,
-    'Door Model 16',
-    12.05,
-    2,
-    'Open',
-    '2023-11-09 16:51:57'
-  );
+-- Insert sample data into automation.auto_door
+INSERT INTO automation.auto_door (id, service_id, model, avg_energy_consumption, local_id, is_active, created_at) VALUES
+(1, 2, 'AutoDoorX', 2.5, 1, TRUE, '2024-01-01 08:00:00'),
+(2, 2, 'AutoDoorY', 3.0, 2, TRUE, '2024-01-01 08:00:00'),
+(3, 2, 'AutoDoorZ', 2.8, 3, TRUE, '2024-01-01 08:00:00'),
+(4, 2, 'AutoDoorA', 3.2, 4, TRUE, '2024-01-01 08:00:00'),
+(5, 2, 'AutoDoorB', 2.9, 5, TRUE, '2024-01-01 08:00:00'),
+(6, 2, 'AutoDoorC', 3.1, 6, TRUE, '2024-02-01 08:00:00'),
+(7, 2, 'AutoDoorD', 3.3, 7, TRUE, '2024-02-01 08:00:00'),
+(8, 2, 'AutoDoorE', 3.4, 8, TRUE, '2024-02-01 08:00:00'),
+(9, 2, 'AutoDoorF', 3.5, 9, TRUE, '2024-02-01 08:00:00'),
+(10, 2, 'AutoDoorG', 3.6, 10, TRUE, '2024-02-01 08:00:00');
 
--- lighting.light.csv
-INSERT INTO
-  lighting.light (
-    id,
-    service_id,
-    model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    1,
-    'Light Model 1',
-    10.0,
-    1,
-    'Active',
-    '2023-01-01 00:00:00'
-  ),
-  (
-    2,
-    2,
-    'Light Model 2',
-    15.0,
-    2,
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
+-- Insert sample data into lighting.light
+INSERT INTO lighting.light (id, service_id, model, avg_energy_consumption, local_id, is_active, created_at) VALUES
+(1, 2, 'LightModelX', 1.5, 1, TRUE, '2024-01-01 08:00:00'),
+(2, 2, 'LightModelY', 2.0, 2, TRUE, '2024-01-01 08:00:00'),
+(3, 2, 'LightModelZ', 1.8, 3, TRUE, '2024-01-01 08:00:00'),
+(4, 2, 'LightModelA', 2.2, 4, TRUE, '2024-01-01 08:00:00'),
+(5, 2, 'LightModelB', 1.9, 5, TRUE, '2024-01-01 08:00:00'),
+(6, 2, 'LightModelC', 2.1, 6, TRUE, '2024-02-01 08:00:00'),
+(7, 2, 'LightModelD', 2.3, 7, TRUE, '2024-02-01 08:00:00'),
+(8, 2, 'LightModelE', 2.4, 8, TRUE, '2024-02-01 08:00:00'),
+(9, 2, 'LightModelF', 2.5, 9, TRUE, '2024-02-01 08:00:00'),
+(10, 2, 'LightModelG', 2.6, 10, TRUE, '2024-02-01 08:00:00');
 
--- finance.bill.csv
-INSERT INTO
-  finance.bill (
-    id,
-    value,
-    month,
-    consumption,
-    measurement_unit,
-    due_date,
-    paid,
-    issued_at,
-    paid_at
-  )
-VALUES
-  (
-    1,
-    100.0,
-    1,
-    50.0,
-    'kWh',
-    '2023-01-31 00:00:00',
-    false,
-    '2023-01-01 00:00:00',
-    NULL
-  ),
-  (
-    2,
-    150.0,
-    2,
-    75.0,
-    'kWh',
-    '2023-02-28 00:00:00',
-    true,
-    '2023-02-01 00:00:00',
-    '2023-02-15 00:00:00'
-  );
-
--- automation.auto_door.csv
-INSERT INTO
-  automation.auto_door (
-    id,
-    service_id,
-    model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    12,
-    'Door Model 1',
-    11.05,
-    11,
-    'Closed',
-    '2023-10-25 08:11:52'
-  ),
-  (
-    2,
-    13,
-    'Door Model 2',
-    17.92,
-    9,
-    'Closed',
-    '2023-04-14 10:57:37'
-  ),
-  (
-    3,
-    4,
-    'Door Model 3',
-    5.53,
-    15,
-    'Closed',
-    '2023-04-05 07:22:40'
-  ),
-  (
-    4,
-    12,
-    'Door Model 4',
-    6.25,
-    20,
-    'Open',
-    '2023-10-17 07:46:33'
-  ),
-  (
-    5,
-    3,
-    'Door Model 5',
-    17.62,
-    4,
-    'Open',
-    '2023-01-20 12:05:25'
-  ),
-  (
-    6,
-    18,
-    'Door Model 6',
-    6.74,
-    7,
-    'Open',
-    '2023-02-20 12:24:00'
-  ),
-  (
-    7,
-    18,
-    'Door Model 7',
-    15.84,
-    8,
-    'Closed',
-    '2023-09-14 05:40:24'
-  ),
-  (
-    8,
-    17,
-    'Door Model 8',
-    13.32,
-    5,
-    'Closed',
-    '2023-12-09 17:02:56'
-  ),
-  (
-    9,
-    15,
-    'Door Model 9',
-    10.0,
-    15,
-    'Closed',
-    '2023-01-01 02:45:54'
-  ),
-  (
-    10,
-    4,
-    'Door Model 10',
-    16.86,
-    17,
-    'Closed',
-    '2023-09-12 20:52:29'
-  ),
-  (
-    11,
-    16,
-    'Door Model 11',
-    10.44,
-    16,
-    'Closed',
-    '2023-04-13 05:54:40'
-  ),
-  (
-    12,
-    17,
-    'Door Model 12',
-    17.14,
-    18,
-    'Closed',
-    '2023-05-14 01:12:05'
-  ),
-  (
-    13,
-    18,
-    'Door Model 13',
-    13.69,
-    16,
-    'Open',
-    '2023-05-19 06:35:53'
-  ),
-  (
-    14,
-    15,
-    'Door Model 14',
-    8.66,
-    18,
-    'Open',
-    '2023-03-03 14:45:30'
-  ),
-  (
-    15,
-    3,
-    'Door Model 15',
-    17.62,
-    17,
-    'Closed',
-    '2023-05-03 20:55:47'
-  ),
-  (
-    16,
-    8,
-    'Door Model 16',
-    12.05,
-    2,
-    'Open',
-    '2023-11-09 16:51:57'
-  );
-
--- finance.bill.csv
-INSERT INTO
-  finance.bill (
-    id,
-    value,
-    month,
-    consumption,
-    measurement_unit,
-    due_date,
-    paid,
-    issued_at,
-    paid_at
-  )
-VALUES
-  (
-    1,
-    100.0,
-    1,
-    50.0,
-    'kWh',
-    '2023-01-31 00:00:00',
-    false,
-    '2023-01-01 00:00:00',
-    NULL
-  ),
-  (
-    2,
-    150.0,
-    2,
-    75.0,
-    'kWh',
-    '2023-02-28 00:00:00',
-    true,
-    '2023-02-01 00:00:00',
-    '2023-02-15 00:00:00'
-  );
-
--- garden.irrigation_point.csv
-INSERT INTO
-  garden.irrigation_point (
-    id,
-    sprinklers_count,
-    avg_water_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (1, 10, 20.0, 1, 'Active', '2023-01-01 00:00:00'),
-  (
-    2,
-    15,
-    25.0,
-    2,
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
-
--- garden.irrigation.csv
-INSERT INTO
-  garden.irrigation (
-    id,
-    service_id,
-    irrigation_point_id,
-    start_time,
-    end_time
-  )
-VALUES
-  (
-    1,
-    1,
-    1,
-    '2023-01-01 06:00:00',
-    '2023-01-01 07:00:00'
-  ),
-  (
-    2,
-    2,
-    2,
-    '2023-02-01 06:00:00',
-    '2023-02-01 07:00:00'
-  );
-
--- global.local.csv
-INSERT INTO
-  global.local (id, name, description)
-VALUES
-  (1, 'Local 1', 'Description for Local 1'),
-  (2, 'Local 2', 'Description for Local 2'),
-  (3, 'Local 3', 'Description for Local 3'),
-  (4, 'Local 4', 'Description for Local 4'),
-  (5, 'Local 5', 'Description for Local 5'),
-  (6, 'Local 6', 'Description for Local 6'),
-  (7, 'Local 7', 'Description for Local 7'),
-  (8, 'Local 8', 'Description for Local 8'),
-  (9, 'Local 9', 'Description for Local 9'),
-  (10, 'Local 10', 'Description for Local 10'),
-  (11, 'Local 11', 'Description for Local 11'),
-  (12, 'Local 12', 'Description for Local 12'),
-  (13, 'Local 13', 'Description for Local 13'),
-  (14, 'Local 14', 'Description for Local 14'),
-  (15, 'Local 15', 'Description for Local 15'),
-  (16, 'Local 16', 'Description for Local 16'),
-  (17, 'Local 17', 'Description for Local 17'),
-  (18, 'Local 18', 'Description for Local 18'),
-  (19, 'Local 19', 'Description for Local 19'),
-  (20, 'Local 20', 'Description for Local 20');
-
--- global.resource.csv
-INSERT INTO
-  global.resource (id, name)
-VALUES
-  (1, 'Resource 1'),
-  (2, 'Resource 2'),
-  (3, 'Resource 3'),
-  (4, 'Resource 4'),
-  (5, 'Resource 5'),
-  (6, 'Resource 6'),
-  (7, 'Resource 7'),
-  (8, 'Resource 8'),
-  (9, 'Resource 9'),
-  (10, 'Resource 10'),
-  (11, 'Resource 11'),
-  (12, 'Resource 12'),
-  (13, 'Resource 13'),
-  (14, 'Resource 14'),
-  (15, 'Resource 15'),
-  (16, 'Resource 16'),
-  (17, 'Resource 17'),
-  (18, 'Resource 18'),
-  (19, 'Resource 19'),
-  (20, 'Resource 20');
-
--- global.service.csv
-INSERT INTO
-  global.service (id, name, resource_id)
-VALUES
-  (1, 'Service 1', 5),
-  (2, 'Service 2', 12),
-  (3, 'Service 3', 11),
-  (4, 'Service 4', 6),
-  (5, 'Service 5', 15),
-  (6, 'Service 6', 4),
-  (7, 'Service 7', 20),
-  (8, 'Service 8', 19),
-  (9, 'Service 9', 14),
-  (10, 'Service 10', 2),
-  (11, 'Service 11', 11),
-  (12, 'Service 12', 18),
-  (13, 'Service 13', 7),
-  (14, 'Service 14', 18),
-  (15, 'Service 15', 4),
-  (16, 'Service 16', 12),
-  (17, 'Service 17', 10),
-  (18, 'Service 18', 1),
-  (19, 'Service 19', 12),
-  (20, 'Service 20', 8);
-
--- lighting.light.csv
-INSERT INTO
-  lighting.light (
-    id,
-    service_id,
-    model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    1,
-    'Light Model 1',
-    10.0,
-    1,
-    'Active',
-    '2023-01-01 00:00:00'
-  ),
-  (
-    2,
-    2,
-    'Light Model 2',
-    15.0,
-    2,
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
-
--- security.guard.csv
-INSERT INTO
-  security.guard (
-    cpf,
-    service_id,
-    name,
-    salary,
-    local_id,
-    created_at
-  )
-VALUES
-  (
-    '12345678901',
-    1,
-    'Guard 1',
-    3000.0,
-    1,
-    '2023-01-01 00:00:00'
-  ),
-  (
-    '23456789012',
-    2,
-    'Guard 2',
-    3500.0,
-    2,
-    '2023-02-01 00:00:00'
-  );
-
--- security.monitoring_point.csv
-INSERT INTO
-  security.monitoring_point (
-    id,
-    service_id,
-    camera_model,
-    avg_energy_consumption,
-    local_id,
-    status,
-    created_at
-  )
-VALUES
-  (
-    1,
-    1,
-    'Camera Model 1',
-    5.0,
-    '1',
-    'Active',
-    '2023-01-01 00:00:00'
-  ),
-  (
-    2,
-    2,
-    'Camera Model 2',
-    7.0,
-    '2',
-    'Inactive',
-    '2023-02-01 00:00:00'
-  );
+-- Insert sample data into finance.bill
+INSERT INTO finance.bill (id, value, month, consumption, measurement_unit, due_date, paid, issued_at, paid_at) VALUES
+(1, 100.0, 1, 50.0, 'kWh', '2024-01-31 23:59:59', TRUE, '2024-01-01 08:00:00', '2024-01-15 08:00:00'),
+(2, 150.0, 1, 75.0, 'm³', '2024-01-31 23:59:59', FALSE, '2024-01-01 08:00:00', NULL),
+(3, 120.0, 2, 60.0, 'kWh', '2024-02-28 23:59:59', TRUE, '2024-02-01 08:00:00', '2024-02-15 08:00:00'),
+(4, 180.0, 2, 90.0, 'm³', '2024-02-28 23:59:59', FALSE, '2024-02-01 08:00:00', NULL),
+(5, 130.0, 3, 65.0, 'kWh', '2024-03-31 23:59:59', TRUE, '2024-03-01 08:00:00', '2024-03-15 08:00:00'),
+(6, 140.0, 3, 70.0, 'm³', '2024-03-31 23:59:59', FALSE, '2024-03-01 08:00:00', NULL),
+(7, 110.0, 4, 55.0, 'kWh', '2024-04-30 23:59:59', TRUE, '2024-04-01 08:00:00', '2024-04-15 08:00:00'),
+(8, 160.0, 4, 80.0, 'm³', '2024-04-30 23:59:59', FALSE, '2024-04-01 08:00:00', NULL),
+(9, 115.0, 5, 57.5, 'kWh', '2024-05-31 23:59:59', TRUE, '2024-05-01 08:00:00', '2024-05-15 08:00:00'),
+(10, 165.0, 5, 82.5, 'm³', '2024-05-31 23:59:59', FALSE, '2024-05-01 08:00:00', NULL),
+(11, 125.0, 6, 62.5, 'kWh', '2024-06-30 23:59:59', TRUE, '2024-06-01 08:00:00', '2024-06-15 08:00:00'),
+(12, 175.0, 6, 87.5, 'm³', '2024-06-30 23:59:59', FALSE, '2024-06-01 08:00:00', NULL);
