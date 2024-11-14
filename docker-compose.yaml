@@ -11,6 +11,8 @@ services:
     volumes:
       - ./database/oltp/1_oltp.sql:/docker-entrypoint-initdb.d/1_oltp.sql
       - ./database/oltp/2_oltp.sql:/docker-entrypoint-initdb.d/2_oltp.sql
+    networks:
+      - bi-network
 
   olap:
     image: postgres:latest
@@ -23,3 +25,38 @@ services:
       - "5433:5432"
     volumes:
       - ./database/olap/1_olap.sql:/docker-entrypoint-initdb.d/olap.sql
+    networks:
+      - bi-network
+
+  metabase-db:
+    image: postgres:latest
+    container_name: bi-metabase-db
+    environment:
+      POSTGRES_USER: metabase
+      POSTGRES_PASSWORD: metabase
+      POSTGRES_DB: metabase
+    ports:
+      - "5435:5435"
+    networks:
+      - bi-network
+  
+  metabase:
+    image: metabase/metabase
+    container_name: bi-metabase
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5435
+      MB_DB_USER: metabase
+      MB_DB_PASS: metabase
+      MB_DB_HOST: metabase-db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - metabase-db
+    networks:
+      - bi-network
+
+networks:
+  bi-network:
+    driver: bridge
