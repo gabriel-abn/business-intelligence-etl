@@ -27,7 +27,6 @@ CREATE TABLE olap.dim_sprinkler (
   sprinklers_count INTEGER,
   avg_water_consumption FLOAT,
   local_id INTEGER,
-  status VARCHAR(255),
   created_at TIMESTAMP,
   --
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
@@ -39,7 +38,6 @@ CREATE TABLE olap.dim_light (
   model VARCHAR(255),
   avg_energy_consumption FLOAT,
   local_id INTEGER,
-  status VARCHAR(255),
   created_at TIMESTAMP,
   --
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
@@ -53,7 +51,6 @@ CREATE TABLE olap.dim_auto_door (
   model VARCHAR(255),
   avg_energy_consumption FLOAT,
   local_id INTEGER,
-  status VARCHAR(255),
   created_at TIMESTAMP,
   --
   FOREIGN KEY (local_id) REFERENCES dim_local(id)
