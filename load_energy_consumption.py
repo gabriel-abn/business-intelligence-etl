@@ -131,16 +131,21 @@ def fetch_light_data(start_date: datetime, end_date: datetime) -> list[Light]:
             SELECT l.id, l.service_id, l.model, l.avg_energy_consumption,
                 l.local_id, l.is_active, l.created_at
             FROM lighting.light l
-            WHERE l.created_at BETWEEN %(start_date)s AND %(end_date)s
             """,
-            {
-                "start_date": start_date.strftime("%Y-%m-%d"),
-                "end_date": end_date.strftime("%Y-%m-%d"),
-            },
+            [],
         )
+
         light_data = [Light(*row) for row in oltp_cursor.fetchall()]
         oltp_cursor.close()
-        return light_data
+        filtered_data = []
+
+        for data in filter(
+            lambda x: x.created_at >= start_date or x.created_at <= end_date,
+            light_data,
+        ):
+            filtered_data.append(data)
+
+        return filtered_data
     except Exception as e:
         pprint(e)
         raise
@@ -163,17 +168,22 @@ def fetch_auto_door_data(start_date: datetime, end_date: datetime) -> list[AutoD
             """
             SELECT ad.id, ad.service_id, ad.model, ad.avg_energy_consumption,
                 ad.local_id, ad.is_active, ad.created_at
-            FROM automation.auto_door ad
-            WHERE ad.created_at BETWEEN %(start_date)s AND %(end_date)s
+            FROM automation.auto_door ad;
             """,
-            {
-                "start_date": start_date.strftime("%Y-%m-%d"),
-                "end_date": end_date.strftime("%Y-%m-%d"),
-            },
+            [],
         )
+
         auto_door_data = [AutoDoor(*row) for row in oltp_cursor.fetchall()]
         oltp_cursor.close()
-        return auto_door_data
+        filtered_data = []
+
+        for data in filter(
+            lambda x: x.created_at >= start_date or x.created_at <= end_date,
+            auto_door_data,
+        ):
+            filtered_data.append(data)
+
+        return filtered_data
     except Exception as e:
         pprint(e)
         raise
@@ -196,6 +206,7 @@ def load_local_dimension(local_data: list[Local]) -> list[int]:
                 },
             )
             local_ids.append(olap_cursor.fetchone()[0])
+
         olap_connection.commit()
         olap_cursor.close()
         return local_ids
@@ -279,6 +290,7 @@ def load_fact_automation_billing(
         ) + sum(auto_door.avg_energy_consumption for auto_door in auto_door_data)
 
         for light_id, auto_door_id in zip(light_ids, auto_door_ids):
+            print(light_id, auto_door_id)
             olap_cursor.execute(
                 """
                 INSERT INTO olap.fact_automation_billing (bill_id, auto_door_id,
@@ -318,12 +330,15 @@ def transform(time_dim_id: int, current_date: datetime):
         light_data = fetch_light_data(start_date, end_date)
         auto_door_data = fetch_auto_door_data(start_date, end_date)
 
-        load_local_dimension(local_data)
+        # pprint(f"{local_data=}")
+        pprint(f"{light_data=}")
+        pprint(f"{auto_door_data=}")
 
+        local_ids = load_local_dimension(local_data)
         light_ids = load_light_dimension(light_data)
         auto_door_ids = load_auto_door_dimension(auto_door_data)
 
-        pprint(time_dim_id, light_ids, auto_door_ids, light_data, auto_door_data)
+        print(time_dim_id, light_ids, auto_door_ids)
 
         load_fact_automation_billing(
             time_dim_id, light_ids, auto_door_ids, light_data, auto_door_data
